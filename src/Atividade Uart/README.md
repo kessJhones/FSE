@@ -7,46 +7,6 @@ Neste trabalho o(a) aluno(a) irá exercitar o acesso a dispositivos (devices) ut
 ## 2 - CIRCUITO ESQUEMÁTICO
 
 Para conectar o Raspberry Pi ao Arduino, será utilizada a porta serial através dos pinos 8 (UART_TXD) e 10 (UART_RXD) do Raspberry Pi e ps respectivos pinos RX, TX do Arduino. Porém, é necessário observar que o Raspberry Pi opera a uma tensão de 3.3V enquanto a maioria das placas Arduino operam em 5V. Neste caso será necessário a utilização de algum método de conversão de tensão (Level Shifter, Divisor de Tensão, Optoacopladores, etc.).
-
-![Conexão entre Raspberry Pi e Arduino - UART](./imagens/rasp_arduino_uart.png)
-
-## 3 - ALGUMAS FUNÇÕES A SEREM USADAS
-
-1. POSIX **open()**: Para abertura do arquivo que apontará para a porta serial (UART):
-```
-int open(const char* path, int oflag, …)
-``` 
-Exemplo: 
-```
-int fd;
-fd = open(“/tmp/teste.txt”, O_WRONLY);
-```
-2. POSIX **close()**: Para fechar o arquivo referente à porta serial:
-```
-int close(int fd);
-```
-Exemplo: 
-```
-int fd;
-close(fd);
-```
-POSIX **write()**: Para escrever dados na porta serial
-```
-ssize_t write(int fildes, const void *buf, size_t nbyte);
-```
-Exemplo: 
-```
-short siX16=0x7FFF;           
-int res = write(fid, &siX16, sizeof(short) );
-```
-POSIX **read()**: Para ler dados da porta serial
-```
-ssize_t read(int fildes, void *buf, size_t nbyte);
-```
-Exemplo: 
-```
-short siX16;          
-int res = read(fid, &siX16, sizeof(short) );
 ```
 
 ## 4 - ROTEIRO
@@ -94,16 +54,3 @@ A seguir apresentamos nas tabelas o conteúdo de cada tipo de mensagem.
 3. Formato dos pacotes de **Recebimento de Dados**
 
 ![Pacode de Recebimento](imagens/pacote_respostas.png)
-
-## 4 - DICAS
-
-1. Lembre-se de considerar um tempo de resposta do dispositivo. Após enviar uma solicitação, aguarde pelo menos 100 ms para ler a resposta ou crie uma lógica de leitura que identifique o buffer vazio da UART e tente ler novamente.  
-2. A UART possiu um buffer (FIFO) de entrada e outro de saída. Portanto, dependendo do momento da leitura *read()* do dispositivo, você poderá receber parte da mensagem ou a mensagem inteira.  
-3. Está disponível neste mesmo repositório o código de exemplo do Arduino que interpreta os dados enviados. Estudem as funções implementadas para compreender a ordem de envio dos bytes.
-
-## 5 - OBSERVAÇÕES
-
-O código pode ser testado no Linux, porém terá que ser compilado para rodar no Raspberry Pi em sala de aula.
-
-O código base em C para o uso da UART no Raspberry Pi se encontra em: 
-[Código UART](https://gitlab.com/fse_fga/uart_raspberry_pi)
