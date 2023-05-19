@@ -7,9 +7,8 @@ Neste trabalho o(a) aluno(a) irá exercitar o acesso a dispositivos (devices) ut
 ## 2 - CIRCUITO ESQUEMÁTICO
 
 Para conectar o Raspberry Pi ao Arduino, será utilizada a porta serial através dos pinos 8 (UART_TXD) e 10 (UART_RXD) do Raspberry Pi e ps respectivos pinos RX, TX do Arduino. Porém, é necessário observar que o Raspberry Pi opera a uma tensão de 3.3V enquanto a maioria das placas Arduino operam em 5V. Neste caso será necessário a utilização de algum método de conversão de tensão (Level Shifter, Divisor de Tensão, Optoacopladores, etc.).
-```
 
-## 4 - ROTEIRO
+## 3 - ROTEIRO
 
 1. Criar um programa em C, no Raspberry Pi, capaz de usar a comunicação com a porta serial UART para ler e escrever conforme o protocolo definido abaixo:  
 
